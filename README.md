@@ -5,7 +5,6 @@ I plan to build a **2D World** game which has an **active inventory system** and
 
 ##User Stories:
 - As a user, I want to be able to access my inventory
-- As a user, I would like my progress to be saves
+- As a user, I want to be able to drop and pickup items
+- As a user, I would like my progress to be saved
 - As a user, I would like to see my objective
-- As a user, I would like to what objectives I've completed
-- As a user, I 
