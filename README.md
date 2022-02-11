@@ -1,10 +1,20 @@
 # My Personal Project
 
-## 2D world Video Game
-I plan to build a **2D World** game which has an **active inventory system** and **health system**, with items which can be used in **battle** and also to **boost stats**. The game will be fairly easy to beat and can be played by anyone. This project is interesting to me because I'm an avid video gameenjoyer and I would like to see how one is made.
- 
+#What will the application do?
+
+It will be a anime card game, with various characters from different anime which have different stats.
+
+#Who will use it?
+
+Any person who is fond of anime or just likes to play card games in general can play this game.
+
+#Why is this project of interest to you?
+
+I like watching anime and I think this could be a fun little game for anyone who shares the same interests.
+
+
 ##User Stories:
-- As a user, I want to be able to access my inventory
-- As a user, I want to be able to drop and pickup items
-- As a user, I would like my progress to be saved
-- As a user, I would like to see my objective
+- As a user, I would like to add cards from my collection to my deck
+- As a user, I would like to purchase new cards
+- As a user, I would like to battle computer 
+- As a user, I would like to my collection of cards
