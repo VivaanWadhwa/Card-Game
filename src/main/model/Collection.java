@@ -1,13 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Collection {
+public class Collection implements Iterable<Card> {
     private List<Card> collection;
 
 //  Constructor for collection
-    public void collection() {
+    public Collection() {
         this.collection  = new ArrayList<>();
     }
 
@@ -21,6 +22,10 @@ public class Collection {
         this.collection.add(c);
     }
 
+    public void addCards(List<Card> lc) {
+        this.collection.addAll(lc);
+    }
+
     public void removeCard(Card c) {
         this.collection.remove(c);
     }
@@ -28,5 +33,28 @@ public class Collection {
     public void addToDeck(Card c,Deck d) {
         d.addCard(c);
         this.collection.remove(c);
+    }
+
+    public Iterator<Card> iterator() {
+        return this.collection.iterator();
+    }
+
+//    public boolean cardInCol(String name) {
+//        for (Card card : this.collection) {
+//            if (card.getName() == name) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+
+    public Card getCardfromID(int id) {
+        for (Card card : this.collection) {
+            if (card.getCardID() == id) {
+                return card;
+            }
+        }
+        return null;
     }
 }
