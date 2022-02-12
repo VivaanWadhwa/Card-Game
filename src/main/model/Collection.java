@@ -8,8 +8,8 @@ public class Collection implements Iterable<Card> {
     private List<Card> collection;
 
 //  Constructor for collection
-    public Collection() {
-        this.collection  = new ArrayList<>();
+    public Collection(List<Card> list) {
+        this.collection  = list;
     }
 
     public List<Card> showCollection() {
@@ -39,15 +39,6 @@ public class Collection implements Iterable<Card> {
         return this.collection.iterator();
     }
 
-//    public boolean cardInCol(String name) {
-//        for (Card card : this.collection) {
-//            if (card.getName() == name) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
 
     public Card getCardfromID(int id) {
         for (Card card : this.collection) {

@@ -1,4 +1,4 @@
-#RECIPE MANAGER
+#ANIME CARD GAME
 
 ##CLASSES REQUIRED
 
@@ -7,8 +7,6 @@ Collection - Collection of cards(done)
 Deck - cards user is currently playing with(done)
 
 Card - A single card(done)
-
-Game - producing an instance of the game
 
 Computer - How computer will play against user
 

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,29 +11,31 @@ public class Deck implements Iterable<Card> {
 //  EFFECTS: Constructs a deck
 //  no of cards < MAX_CARDS
     public Deck(List<Card> list) {
-        if (list.size() < MAX_CARDS) {
+        if (list.size() <= MAX_CARDS) {
             this.deck = list;
         }
     }
 
+    public List<Card> getCards() {
+        return this.deck;
+    }
+
     public void addCard(Card c) {
-        if (deck.size() < MAX_CARDS) {
+        if (deck.size() <= MAX_CARDS) {
             deck.add(c);
         }
     }
 
     public void addCards(List<Card> lc) {
-        deck.addAll(lc);
+        if (deck.size() <= MAX_CARDS) {
+            deck.addAll(lc);
+        }
     }
 
     public void removeCard(Card c) {
         if (deck.size() > 0) {
             deck.remove(c);
         }
-    }
-
-    public Iterator<Card> iterator() {
-        return this.deck.iterator();
     }
 
     public Card getCardfromID(int id) {
@@ -44,6 +45,10 @@ public class Deck implements Iterable<Card> {
             }
         }
         return null;
+    }
+
+    public Iterator<Card> iterator() {
+        return this.deck.iterator();
     }
 
 }

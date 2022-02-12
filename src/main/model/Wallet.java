@@ -3,7 +3,7 @@ package model;
 public class Wallet {
     private int balance;
 
-    public void wallet() {
+    public Wallet() {
         this.balance = 1000;
     }
 
@@ -12,6 +12,8 @@ public class Wallet {
     }
 
     public void deductBalance(int cost) {
-        this.balance -= cost;
+        if (this.balance > cost) {
+            this.balance -= cost;
+        }
     }
 }

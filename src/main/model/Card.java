@@ -9,6 +9,7 @@ public class Card {
     private int cardID;
     private int health;
     private List<Move> moves;
+    private String condition;
 
 
 
@@ -18,6 +19,7 @@ public class Card {
         this.cardID = cardId;
         this.moves = moves;
         this.health = 100;
+        this.condition = "Alive";
 
     }
 
@@ -39,7 +41,17 @@ public class Card {
         return this.moves;
     }
 
+    public String checkCondition() {
+        return this.condition;
+    }
+
     public void doDamage(Move m) {
         this.health -= m.getDamage();
+        if (this.health <= 0) {
+            this.health = 0;
+            this.condition = "Fainted";
+        } else if (this.health < 50) {
+            this.condition = "Damaged";
+        }
     }
 }

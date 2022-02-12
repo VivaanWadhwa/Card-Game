@@ -1,9 +1,7 @@
 package ui;
 
-import model.Card;
+import model.*;
 import model.Collection;
-import model.Deck;
-import model.Shop;
 import model.moves.Move;
 
 import java.util.*;
@@ -14,22 +12,23 @@ public class CardGame {
     private Deck deck;
     private Boolean keepGoing;
     private Shop shop;
+    private Wallet wallet;
 
     //   Moves
     //  Major Attacks
-    private Move fireCharge = new Move(12,5);
-    private Move waterGun = new Move(11,4);
-    private Move razorLeaf = new Move(12,5);
-    private Move electricBolt = new Move(11,4);
-    private Move flameThrower = new Move(11,4);
-    private Move hydroCanon = new Move(12,5);
-    private Move leafWhip = new Move(11,4);
-    private Move karin = new Move(12,5);
+    private final Move fireCharge = new Move("fireCharge",12,5);
+    private final Move waterGun = new Move("waterGun",11,4);
+    private final Move razorLeaf = new Move("razorLeaf",12,5);
+    private final Move electricBolt = new Move("electricBolt",11,4);
+    private final Move flameThrower = new Move("flameThrower",11,4);
+    private final Move hydroCanon = new Move("hydroCanon",12,5);
+    private final Move leafWhip = new Move("leafWhip",11,4);
+    private final Move karin = new Move("karin",12,5);
     //  Common Attacks
-    private Move quickClaw = new Move(5,2);
-    private Move quickPunch = new Move(4,1);
-    private Move push = new Move(5,2);
-    private Move kick = new Move(4,1);
+    private final Move quickClaw = new Move("quickClaw",5,2);
+    private final Move quickPunch = new Move("quickPunch",4,1);
+    private final Move push = new Move("push",5,2);
+    private final Move kick = new Move("kick",4,1);
 
     public CardGame() {
         runGame();
@@ -37,21 +36,20 @@ public class CardGame {
 
     public void runGame() {
         this.keepGoing = true;
-        String command = null;
 
         init();
         initMoves();
 
         while (this.keepGoing) {
-            game(command);
+            game();
         }
 
         System.out.println("\nGoodbye!");
     }
 
-    public void game(String command) {
+    public void game() {
         displayMenu();
-        command = input.next();
+        String command = input.next();
         command = command.toLowerCase();
 
         if (command.equals("q")) {
@@ -63,9 +61,9 @@ public class CardGame {
 
     public void init() {
         input = new Scanner(System.in);
-        this.col = new Collection();
         Hashtable<Card, Integer> inventory = new Hashtable<>();
         this.shop = new Shop(inventory);
+        this.wallet = new Wallet();
     }
 
     public void initMoves() {
@@ -85,9 +83,9 @@ public class CardGame {
         Card card6 = new Card("Card6", 6, moveSet6);
         Card card7 = new Card("Card7", 7, moveSet7);
         Card card8 = new Card("Card8", 8, moveSet8);
-        List<Card> otherList1 = Arrays.asList(card1,card2,card7);
+        List<Card> otherList1 = new ArrayList<>(Arrays.asList(card1,card2,card7));
         List<Card> otherList2 = new ArrayList<>(Arrays.asList(card5, card6, card3, card4));
-        col.addCards(otherList1);
+        col = new Collection(otherList1);
         this.deck =  new Deck(otherList2);
         this.shop.addItem(card8,100);
     }
@@ -122,9 +120,59 @@ public class CardGame {
     }
 
     private void shop() {
+        Set<Card> inv = this.shop.getKeys();
+        System.out.println("Name\tcardID\tCost");
+        for (Card card: inv) {
+            System.out.println(card.getName() + "\t" + card.getCardID() + "\t" + this.shop.getValue(card));
+        }
+        System.out.print("Balance:");
+        System.out.println(this.wallet.getBalance());
+        System.out.println("Enter Card Number to buy");
+        System.out.println("b -> Go back");
+        String command = input.next();
+        processShopCommand(command);
     }
 
-    private void play() {}
+    private void processShopCommand(String command) {
+        if (isInteger(command)) {
+            int id = Integer.parseInt(command);
+            this.shop.buyItem(this.shop.getCardFromID(id),this.wallet,this.col);
+        } else if (command.equals("b")) {
+            game();
+        } else {
+            System.out.println("Selection is not Valid...");
+            shop();
+        }
+    }
+
+
+    public static boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+        int length = str.length();
+        if (length == 0) {
+            return false;
+        }
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            if (length == 1) {
+                return false;
+            }
+            i = 1;
+        }
+        for (; i < length; i++) {
+            char c = str.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void play() {
+//    TODO!!!!!
+    }
 
     private void deck() {
         System.out.println("Welcome to DECK");
@@ -150,11 +198,11 @@ public class CardGame {
                 removeCard();
                 break;
             case "b":
-                command = null;
-                game(command);
+                game();
                 break;
             default:
                 System.out.println("Selection not Valid...");
+                deck();
         }
     }
 
@@ -193,16 +241,47 @@ public class CardGame {
             System.out.print(card.getName() + "\t");
             System.out.println(card.getCardID());
         }
+        System.out.println("Select Card Number to see Card Details");
         System.out.println("\t b -> go back");
         String command = input.next();
+        processCollectionCommand(command);
+    }
+
+    private void processCollectionCommand(String command) {
         if (command.equals("b")) {
-            command = null;
-            game(command);
+            game();
+        } else if (isInteger(command)) {
+            showDetails(this.col.getCardfromID(Integer.parseInt(command)));
+            System.out.println("b -> go back");
+            String commandNew = input.next();
+            if (commandNew.equals("b")) {
+                collection();
+            } else {
+                System.out.println("Selection not Valid...");
+                game();
+            }
         } else {
             System.out.println("Selection not Valid...");
+            collection();
         }
     }
 
+    private void showDetails(Card card) {
+        System.out.print("Name:");
+        System.out.println(card.getName());
+        System.out.print("ID");
+        System.out.println(card.getName());
+        System.out.print("Health:");
+        System.out.println(card.getHealth());
+        System.out.println("Moves:");
+        List<Move> moves = card.getMoves();
+        System.out.println("Name\tdDamage\tSpeed");
+        for (Move move : moves) {
+            System.out.print(move.getName() + "\t");
+            System.out.print(move.getDamage() + "\t");
+            System.out.println(move.getSpeed());
+        }
+    }
 
 
 }
