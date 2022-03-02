@@ -33,10 +33,6 @@ public class Card {
         return health;
     }
 
-    public int getCardID() {
-        return cardID;
-    }
-
     public List<Move> getMoves() {
         return this.moves;
     }
@@ -45,6 +41,16 @@ public class Card {
         return this.condition;
     }
 
+//  MODIFIES: this
+//  EFFECTS: Gets a particular card from the deck using its ID
+    public int getCardID() {
+        return cardID;
+    }
+
+//  MODIFIES: this
+//  EFFECTS: Reduces health of card according to damage of Move
+//           if health reaches zero, maintains it at that
+//           if health is < 50, condition is damages, and if =0, then Fainted
     public void doDamage(Move m) {
         this.health -= m.getDamage();
         if (this.health <= 0) {

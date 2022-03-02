@@ -30,16 +30,19 @@ public class Collection implements Iterable<Card> {
         this.collection.remove(c);
     }
 
+//  MODIFIES: this and deck
+//  EFFECTS: Removes card from collection and adds to deck
     public void addToDeck(Card c,Deck d) {
         d.addCard(c);
         this.collection.remove(c);
     }
-
+//  EFFECTS: returns iterable collection
     public Iterator<Card> iterator() {
         return this.collection.iterator();
     }
 
-
+//  MODIFIES: this
+//  EFFECTS: Gets a particular card from the deck using its ID
     public Card getCardfromID(int id) {
         for (Card card : this.collection) {
             if (card.getCardID() == id) {

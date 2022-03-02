@@ -10,6 +10,7 @@ public class CardGame {
     private Scanner input;
     private Collection col;
     private Deck deck;
+    private Deck cpudeck;
     private Boolean keepGoing;
     private Shop shop;
     private Wallet wallet;
@@ -85,9 +86,11 @@ public class CardGame {
         Card card8 = new Card("Card8", 8, moveSet8);
         List<Card> otherList1 = new ArrayList<>(Arrays.asList(card1,card2,card7));
         List<Card> otherList2 = new ArrayList<>(Arrays.asList(card5, card6, card3, card4));
+        List<Card> otherList3 = new ArrayList<>(Arrays.asList(card1,card2,card7,card8));
         col = new Collection(otherList1);
         this.deck =  new Deck(otherList2);
         this.shop.addItem(card8,100);
+        this.cpudeck = new Deck(otherList3);
     }
 
     private void displayMenu() {
@@ -171,7 +174,87 @@ public class CardGame {
     }
 
     private void play() {
-//    TODO!!!!!
+        System.out.println("The GAME will begin now");
+        System.out.println("This is your DECK");
+        for (Card card : this.deck) {
+            System.out.println(card.getName());
+        }
+        Card cpuCard = cpudeck.randomCard();
+        turn(cpuCard);
+    }
+
+    private void turn(Card cpuCard) {
+        System.out.println("Choose a Character to play");
+        for (Card card : this.deck) {
+            System.out.print(card.getName() + "\t");
+            System.out.println(card.getCardID());
+        }
+        int command = Integer.parseInt(input.next());
+        Card selectedCard = deck.getCardfromID(command);
+        battle(selectedCard,cpuCard);
+
+    }
+
+    private void battle(Card selectedCard, Card cpuCard) {
+        while (selectedCard.getHealth() > 0 || cpuCard.getHealth() > 0) {
+            System.out.println("Your Card:" + selectedCard.getName());
+            System.out.println("CPU Card:" + cpuCard.getName());
+            System.out.println("Moves:");
+            List<Move> moves = selectedCard.getMoves();
+            Formatter fmt = new Formatter();
+            fmt.format("%15s %15s %15s %15s\n", "Name", "Damage", "Speed", "Card Number");
+            int i = 0;
+            for (Move m : moves) {
+                fmt.format("%15s %15s %15s %15s\n", m.getName(), m.getDamage(), m.getSpeed(), ++i);
+            }
+            System.out.println(fmt);
+            System.out.println("Select move number to play");
+            int command = Integer.parseInt(input.next());
+            Move selectedMove = moves.get(command - 1);
+            Move cpuMove = getRandCompMove(cpuCard);
+            handleDamage(selectedCard, selectedMove, cpuMove, cpuCard);
+            System.out.println(selectedCard.getHealth());
+            System.out.println(cpuCard.getHealth());
+        }
+    }
+
+    private void handleDamage(Card selectedCard, Move selectedMove, Move cpuMove, Card cpuCard) {
+        if (fasterAttack(selectedMove,cpuMove) == selectedMove) {
+            damage(selectedCard,
+                    selectedMove,
+                    cpuMove,
+                    cpuCard);
+        } else {
+            damage(cpuCard,
+                    cpuMove,
+                    selectedMove,
+                    selectedCard);
+        }
+    }
+
+    private Move fasterAttack(Move move1, Move move2) {
+        if (move1.getSpeed() <= move2.getSpeed()) {
+            return move1;
+        } else {
+            return move2;
+        }
+    }
+
+    private Move getRandCompMove(Card cpuCard) {
+        List<Move> cpuMoves = cpuCard.getMoves();
+        Random rand = new Random();
+        Move m = cpuMoves.get(rand.nextInt(cpuMoves.size()));
+        return m;
+    }
+
+    private void damage(Card faster, Move fasterMove, Move slowerMove, Card slower) {
+
+        System.out.println(faster.getName() + " performed " + fasterMove.getName());
+        slower.doDamage(fasterMove);
+        System.out.println(slower.getName() + "'s health went down to " + slower.getHealth());
+        System.out.println(slower.getName() + " performed " + slowerMove.getName());
+        faster.doDamage(slowerMove);
+        System.out.println(faster.getName() + "'s health went down to " + faster.getHealth());
     }
 
     private void deck() {

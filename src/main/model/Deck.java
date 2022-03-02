@@ -2,6 +2,7 @@ package model;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class Deck implements Iterable<Card> {
     private List<Card> deck;
@@ -16,28 +17,40 @@ public class Deck implements Iterable<Card> {
         }
     }
 
+//  Getter
     public List<Card> getCards() {
         return this.deck;
     }
 
+//  MODIFIES: this
+//  REQUIRES: deck size < MAX_CARDS
+//  EFFECTS: adds a card to deck
     public void addCard(Card c) {
         if (deck.size() <= MAX_CARDS) {
             deck.add(c);
         }
     }
 
+//  MODIFIES: this
+//  REQUIRES: deck size < MAX_CARDS
+//  EFFECTS: adds a list of cards to deck
     public void addCards(List<Card> lc) {
         if (deck.size() <= MAX_CARDS) {
             deck.addAll(lc);
         }
     }
 
+//  MODIFIES: this
+//  REQUIRES: deck size != 0
+//  EFFECTS: Removes card from deck
     public void removeCard(Card c) {
         if (deck.size() > 0) {
             deck.remove(c);
         }
     }
 
+//  MODIFIES: this
+//  EFFECTS: Gets a particular card from the deck using its ID
     public Card getCardfromID(int id) {
         for (Card card : this.deck) {
             if (card.getCardID() == id) {
@@ -47,8 +60,15 @@ public class Deck implements Iterable<Card> {
         return null;
     }
 
+//  EFFECTS: returns Iterable list of cards
     public Iterator<Card> iterator() {
         return this.deck.iterator();
     }
 
+//  EFFECTS: Chooses a random card from a given deck
+    public Card randomCard() {
+        Random rand = new Random();
+        Card c = deck.get(rand.nextInt(deck.size()));
+        return c;
+    }
 }
