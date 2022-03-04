@@ -1,6 +1,9 @@
 package model.moves;
 
-public class Move {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Move implements Writable {
     private int damage;
     private int speed;
     private String name;
@@ -23,4 +26,12 @@ public class Move {
         return this.name;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Name",name);
+        json.put("Damage",damage);
+        json.put("Speed", speed);
+        return json;
+    }
 }

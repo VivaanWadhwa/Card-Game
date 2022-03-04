@@ -1,10 +1,13 @@
 package model;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Iterator;
 import java.util.List;
 
-public class Collection implements Iterable<Card> {
+public class Collection implements Iterable<Card>, Writable {
     private List<Card> collection;
 
 //  Constructor for collection
@@ -36,6 +39,7 @@ public class Collection implements Iterable<Card> {
         d.addCard(c);
         this.collection.remove(c);
     }
+
 //  EFFECTS: returns iterable collection
     public Iterator<Card> iterator() {
         return this.collection.iterator();
@@ -50,5 +54,22 @@ public class Collection implements Iterable<Card> {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Collection",cardsToJson(collection));
+        return json;
+    }
+
+    private JSONArray cardsToJson(List<Card> collection) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Card c : collection) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 }

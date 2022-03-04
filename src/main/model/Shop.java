@@ -1,11 +1,12 @@
 package model;
 
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
-public class Shop {
+import java.util.*;
+
+public class Shop implements Writable {
     private Hashtable<Card, Integer> inventory;
 
 // Constructor
@@ -45,6 +46,36 @@ public class Shop {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        List<Integer> values = new ArrayList<>(inventory.values());
+        List<Card> keys = Collections.list(inventory.keys());
+        json.put("Cards", cardsToJson(keys));
+        json.put("Costs", intToJson(values));
+        return json;
+    }
+
+    private JSONArray intToJson(List<Integer> values) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (int i: values) {
+            jsonArray.put(i);
+        }
+
+        return jsonArray;
+    }
+
+    private JSONArray cardsToJson(List<Card> keys) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Card c : keys) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

@@ -1,0 +1,290 @@
+{
+  "Shop": {
+    "Costs": [110],
+    "Cards": [{
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 5,
+          "Damage": 12,
+          "Name": "razorLeaf"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card10",
+      "CardID": 10
+    }]
+  },
+  "Wallet": {"Balance": 800},
+  "Collection": {"Collection": [
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 5,
+          "Damage": 12,
+          "Name": "fireCharge"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card1",
+      "CardID": 1
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 4,
+          "Damage": 11,
+          "Name": "waterGun"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "quickPunch"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card2",
+      "CardID": 2
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 4,
+          "Damage": 11,
+          "Name": "leafWhip"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "quickPunch"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card7",
+      "CardID": 7
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 5,
+          "Damage": 12,
+          "Name": "karin"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card8",
+      "CardID": 8
+    }
+  ]},
+  "Deck": {"Deck": [
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 4,
+          "Damage": 11,
+          "Name": "flameThrower"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card5",
+      "CardID": 5
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 5,
+          "Damage": 12,
+          "Name": "hydroCanon"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card6",
+      "CardID": 6
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 5,
+          "Damage": 12,
+          "Name": "razorLeaf"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card3",
+      "CardID": 3
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 4,
+          "Damage": 11,
+          "Name": "electricBolt"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "quickPunch"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card4",
+      "CardID": 4
+    },
+    {
+      "Condition": "Alive",
+      "Moves": [
+        {
+          "Speed": 5,
+          "Damage": 12,
+          "Name": "karin"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "quickClaw"
+        },
+        {
+          "Speed": 2,
+          "Damage": 5,
+          "Name": "push"
+        },
+        {
+          "Speed": 1,
+          "Damage": 4,
+          "Name": "kick"
+        }
+      ],
+      "Health": 100,
+      "name": "Card9",
+      "CardID": 9
+    }
+  ]}
+}

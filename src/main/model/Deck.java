@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Deck implements Iterable<Card> {
+public class Deck implements Iterable<Card>, Writable {
     private List<Card> deck;
     private static final int MAX_CARDS = 5;
 
@@ -70,5 +74,22 @@ public class Deck implements Iterable<Card> {
         Random rand = new Random();
         Card c = deck.get(rand.nextInt(deck.size()));
         return c;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Deck",cardsToJson(deck));
+        return json;
+    }
+
+    private JSONArray cardsToJson(List<Card> deck) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Card c : deck) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 }

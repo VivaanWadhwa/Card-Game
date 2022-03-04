@@ -1,10 +1,13 @@
 package model;
 
 import model.moves.Move;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.List;
 
-public class Card {
+public class Card implements Writable {
     private String name;
     private int cardID;
     private int health;
@@ -20,7 +23,6 @@ public class Card {
         this.moves = moves;
         this.health = 100;
         this.condition = "Alive";
-
     }
 
 
@@ -59,5 +61,26 @@ public class Card {
         } else if (this.health < 50) {
             this.condition = "Damaged";
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("CardID", cardID);
+        json.put("Moves", movesToJson(moves));
+        json.put("Health",health);
+        json.put("Condition",condition);
+        return json;
+    }
+
+    private JSONArray movesToJson(List<Move> moves) {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Move m : moves) {
+            jsonArray.put(m.toJson());
+        }
+
+        return jsonArray;
     }
 }

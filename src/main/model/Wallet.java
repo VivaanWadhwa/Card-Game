@@ -1,6 +1,9 @@
 package model;
 
-public class Wallet {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Wallet implements Writable {
     private int balance;
 
 //  Constructor
@@ -19,5 +22,12 @@ public class Wallet {
         if (this.balance > cost) {
             this.balance -= cost;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Balance",balance);
+        return json;
     }
 }
