@@ -8,6 +8,7 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a Card
 public class Card implements Writable {
     private String name;
     private int cardID;
@@ -75,6 +76,7 @@ public class Card implements Writable {
         return json;
     }
 
+//  EFFECTS:Represents a list of Moves as a JSON Array
     private JSONArray movesToJson(List<Move> moves) {
         JSONArray jsonArray = new JSONArray();
 

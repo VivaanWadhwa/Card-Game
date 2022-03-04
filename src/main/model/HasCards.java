@@ -3,14 +3,14 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-
+// Represents all the values used in the Program
 public class HasCards implements Writable {
     Collection collection;
     Deck deck;
     Shop shop;
     Wallet wallet;
 
-
+//  Constructor
     public HasCards(Collection collection, Deck deck, Shop shop, Wallet wallet) {
         this.collection = collection;
         this.deck = deck;
@@ -34,6 +34,7 @@ public class HasCards implements Writable {
     public Wallet getWallet() {
         return wallet;
     }
+
 
     @Override
     public JSONObject toJson() {

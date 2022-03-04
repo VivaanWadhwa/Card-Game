@@ -15,7 +15,9 @@ import java.util.stream.Stream;
 import model.moves.Move;
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+//Code used in this method has been taken from JsonSerializationDemo
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+// Represents a reader that reads HasCards from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -24,7 +26,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads HasCards from file and returns it;
     // throws IOException if an error occurs reading data from file
     public HasCards read() throws IOException {
         String jsonData = readFile(source);
@@ -43,6 +45,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+//  EFFECTS: Parses HasCards from JSON Object and returns it
     private HasCards parseHasCards(JSONObject jsonObject) {
         JSONObject jcol = jsonObject.getJSONObject("Collection");
         Collection col = parseCollection(jcol);
@@ -56,6 +59,7 @@ public class JsonReader {
         return hs;
     }
 
+    //  EFFECTS: Parses Wallet from JSON Object and returns it
     private Wallet parseWallet(JSONObject jwallet) {
         int balance = jwallet.getInt("Balance");
         int deductBalance = 1000 - balance;
@@ -65,7 +69,7 @@ public class JsonReader {
     }
 
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses Collection from JSON object and returns it
     private Collection parseCollection(JSONObject jsonObject) {
         List<Card> collection = new ArrayList<>();
         Collection cl = new Collection(collection);
@@ -73,6 +77,7 @@ public class JsonReader {
         return cl;
     }
 
+//  EFFECTS: Parses Deck from JSON Object and returns it
     private Deck parseDeck(JSONObject jsonObject) {
         List<Card> deck = new ArrayList<>();
         Deck d = new Deck(deck);
@@ -80,12 +85,14 @@ public class JsonReader {
         return d;
     }
 
-
+//  EFFECTS: Parses Shop from JSON Object and returns it
     private Shop parseShop(JSONObject jsonObject) {
         Shop s = addItemsToShop(jsonObject);
         return s;
     }
 
+//  MODIFIES: Shop
+//  EFFECTS: Parses Items from JSON object and adds them to make a shop
     private Shop addItemsToShop(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Cards");
         List<Card> keys = new ArrayList<>();
@@ -110,6 +117,7 @@ public class JsonReader {
         return s;
     }
 
+//  EFFECTS: Returns Card from jsonObject
     private Card returnCard(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int cardID = jsonObject.getInt("CardID");
@@ -123,8 +131,8 @@ public class JsonReader {
         return c;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: Collection
+    // EFFECTS: parses Cards from JSON object and adds them to Collection
     private void addCardsToCol(Collection col, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Collection");
         for (Object json : jsonArray) {
@@ -133,8 +141,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: Deck
+    // EFFECTS: parses Cards from JSON object and adds them to Deck
     private void addCardsToDeck(Deck col, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Deck");
         for (Object json : jsonArray) {
@@ -143,8 +151,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: Collection
+    // EFFECTS: parses a Card from JSON object and adds them to Collection
     private void addCardToCol(Collection col, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int cardID = jsonObject.getInt("CardID");
@@ -158,8 +166,8 @@ public class JsonReader {
         col.addCard(c);
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: Collection
+    // EFFECTS: parses a Card from JSON object and adds them to Deck
     private void addCardToDeck(Deck col, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int cardID = jsonObject.getInt("CardID");
@@ -173,6 +181,8 @@ public class JsonReader {
         col.addCard(c);
     }
 
+    // MODIFIES: moves
+    // EFFECTS: parses a move from JSON object and adds them to moves
     private void addMove(List<Move> moves, JSONObject nextMove) {
         String name = nextMove.getString("Name");
         int damage = nextMove.getInt("Damage");

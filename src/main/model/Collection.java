@@ -7,6 +7,7 @@ import persistence.Writable;
 import java.util.Iterator;
 import java.util.List;
 
+//Represents a Collection which is a list of Cards
 public class Collection implements Iterable<Card>, Writable {
     private List<Card> collection;
 
@@ -63,6 +64,7 @@ public class Collection implements Iterable<Card>, Writable {
         return json;
     }
 
+//  EFFECTS: Returns list of cards as JSONArray
     private JSONArray cardsToJson(List<Card> collection) {
         JSONArray jsonArray = new JSONArray();
 

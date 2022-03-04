@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+//Represents a Wallet
 public class Wallet implements Writable {
     private int balance;
 

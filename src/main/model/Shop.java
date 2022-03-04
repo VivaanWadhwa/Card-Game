@@ -6,6 +6,7 @@ import persistence.Writable;
 
 import java.util.*;
 
+//Represents a Shop which is a Hashtable of Card and Integer
 public class Shop implements Writable {
     private Hashtable<Card, Integer> inventory;
 
@@ -58,6 +59,7 @@ public class Shop implements Writable {
         return json;
     }
 
+//  Returns a list of integers as a JSONArray
     private JSONArray intToJson(List<Integer> values) {
         JSONArray jsonArray = new JSONArray();
 
@@ -68,6 +70,7 @@ public class Shop implements Writable {
         return jsonArray;
     }
 
+//  EFFECTS:Returns a list of cards as a JSONArray
     private JSONArray cardsToJson(List<Card> keys) {
         JSONArray jsonArray = new JSONArray();
 

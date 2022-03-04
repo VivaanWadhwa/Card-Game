@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+// Represents a Deck which is a list of cards
 public class Deck implements Iterable<Card>, Writable {
     private List<Card> deck;
     private static final int MAX_CARDS = 5;
@@ -84,6 +85,7 @@ public class Deck implements Iterable<Card>, Writable {
         return json;
     }
 
+//  EFFECTS: Returns list of cards as a JSON array
     private JSONArray cardsToJson(List<Card> deck) {
         JSONArray jsonArray = new JSONArray();
 
