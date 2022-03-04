@@ -73,7 +73,8 @@ public class DeckTest {
 
     @Test
     void testGetCardFromID() {
-        assertEquals(card1,deck1.getCardfromID(1));
+        assertEquals(card1,deck1.getCardFromID(1));
+        assertNull(deck1.getCardFromID(34));
     }
 
     @Test

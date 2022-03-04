@@ -114,7 +114,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         int cardID = jsonObject.getInt("CardID");
         JSONArray jsonMoves = jsonObject.getJSONArray("Moves");
-        List<Move> moves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
         for (Object json: jsonMoves) {
             JSONObject nextMove = (JSONObject) json;
             addMove(moves,nextMove);
@@ -149,7 +149,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         int cardID = jsonObject.getInt("CardID");
         JSONArray jsonMoves = jsonObject.getJSONArray("Moves");
-        List<Move> moves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
         for (Object json: jsonMoves) {
             JSONObject nextMove = (JSONObject) json;
             addMove(moves,nextMove);
@@ -164,7 +164,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         int cardID = jsonObject.getInt("CardID");
         JSONArray jsonMoves = jsonObject.getJSONArray("Moves");
-        List<Move> moves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
         for (Object json: jsonMoves) {
             JSONObject nextMove = (JSONObject) json;
             addMove(moves,nextMove);

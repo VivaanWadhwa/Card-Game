@@ -1,0 +1,27 @@
+{
+    "Shop": {
+        "Costs": [110],
+        "Cards": [{
+            "Condition": "Alive",
+            "Moves": [],
+            "Health": 100,
+            "name": "A",
+            "CardID": 1
+        }]
+    },
+    "Wallet": {"Balance": 900},
+    "Collection": {"Collection": [{
+        "Condition": "Alive",
+        "Moves": [],
+        "Health": 100,
+        "name": "A",
+        "CardID": 1
+    }]},
+    "Deck": {"Deck": [{
+        "Condition": "Alive",
+        "Moves": [],
+        "Health": 100,
+        "name": "A",
+        "CardID": 1
+    }]}
+}

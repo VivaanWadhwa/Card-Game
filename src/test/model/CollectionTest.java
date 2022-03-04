@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class CollectionTest {
     private Collection collection1;
@@ -72,5 +73,6 @@ public class CollectionTest {
     @Test
     void testGetCardFromID() {
         assertEquals(card4,collection1.getCardfromID(4));
+        assertNull(collection1.getCardfromID(12));
     }
 }

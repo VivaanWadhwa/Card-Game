@@ -1,0 +1,9 @@
+{
+    "Shop": {
+        "Costs": [],
+        "Cards": []
+    },
+    "Wallet": {"Balance": 1000},
+    "Collection": {"Collection": []},
+    "Deck": {"Deck": []}
+}

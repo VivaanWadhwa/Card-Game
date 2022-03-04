@@ -78,14 +78,14 @@ public class CardGame {
         final Move quickPunch = new Move("quickPunch",4,1);
         final Move push = new Move("push",5,2);
         final Move kick = new Move("kick",4,1);
-        List<Move> moveSet1 = new ArrayList<>(Arrays.asList(fireCharge, quickClaw, push, kick));
-        List<Move> moveSet2 = new ArrayList<>(Arrays.asList(waterGun, quickPunch, push, kick));
-        List<Move> moveSet3 = new ArrayList<>(Arrays.asList(razorLeaf, quickClaw, push, kick));
-        List<Move> moveSet4 = new ArrayList<>(Arrays.asList(electricBolt, quickPunch, push, kick));
-        List<Move> moveSet5 = new ArrayList<>(Arrays.asList(flameThrower, quickClaw, push, kick));
-        List<Move> moveSet6 = new ArrayList<>(Arrays.asList(hydroCanon, quickClaw, push, kick));
-        List<Move> moveSet7 = new ArrayList<>(Arrays.asList(leafWhip, quickPunch, push, kick));
-        List<Move> moveSet8 = new ArrayList<>(Arrays.asList(karin, quickClaw, push, kick));
+        ArrayList<Move> moveSet1 = new ArrayList<>(Arrays.asList(fireCharge, quickClaw, push, kick));
+        ArrayList<Move> moveSet2 = new ArrayList<>(Arrays.asList(waterGun, quickPunch, push, kick));
+        ArrayList<Move> moveSet3 = new ArrayList<>(Arrays.asList(razorLeaf, quickClaw, push, kick));
+        ArrayList<Move> moveSet4 = new ArrayList<>(Arrays.asList(electricBolt, quickPunch, push, kick));
+        ArrayList<Move> moveSet5 = new ArrayList<>(Arrays.asList(flameThrower, quickClaw, push, kick));
+        ArrayList<Move> moveSet6 = new ArrayList<>(Arrays.asList(hydroCanon, quickClaw, push, kick));
+        ArrayList<Move> moveSet7 = new ArrayList<>(Arrays.asList(leafWhip, quickPunch, push, kick));
+        ArrayList<Move> moveSet8 = new ArrayList<>(Arrays.asList(karin, quickClaw, push, kick));
         Card card1 = new Card("Card1", 1, moveSet1);
         Card card2 = new Card("Card2", 2, moveSet2);
         Card card3 = new Card("Card3", 3, moveSet3);
@@ -240,7 +240,7 @@ public class CardGame {
             System.out.println(card.getCardID());
         }
         int command = Integer.parseInt(input.next());
-        Card selectedCard = deck.getCardfromID(command);
+        Card selectedCard = deck.getCardFromID(command);
         battle(selectedCard,cpuCard);
 
     }
@@ -361,8 +361,8 @@ public class CardGame {
             System.out.println(card.getCardID());
         }
         int command = Integer.parseInt(input.next());
-        col.addCard(deck.getCardfromID(command));
-        deck.removeCard(deck.getCardfromID(command));
+        col.addCard(deck.getCardFromID(command));
+        deck.removeCard(deck.getCardFromID(command));
         deck();
     }
 

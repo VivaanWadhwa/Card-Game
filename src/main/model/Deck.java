@@ -55,7 +55,7 @@ public class Deck implements Iterable<Card>, Writable {
 
 //  MODIFIES: this
 //  EFFECTS: Gets a particular card from the deck using its ID
-    public Card getCardfromID(int id) {
+    public Card getCardFromID(int id) {
         for (Card card : this.deck) {
             if (card.getCardID() == id) {
                 return card;

@@ -5,19 +5,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Card implements Writable {
     private String name;
     private int cardID;
     private int health;
-    private List<Move> moves;
+    private ArrayList<Move> moves;
     private String condition;
 
 
 
 //  Constructor for Card
-    public Card(String name,int cardId,List<Move> moves) {
+    public Card(String name,int cardId,ArrayList<Move> moves) {
         this.name = name;
         this.cardID = cardId;
         this.moves = moves;
