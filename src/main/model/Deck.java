@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -48,7 +49,7 @@ public class Deck implements Iterable<Card>, Writable {
 //  REQUIRES: deck size != 0
 //  EFFECTS: Removes card from deck
     public void removeCard(Card c) {
-        if (deck.size() > 0) {
+        if (deck.size() != 0) {
             deck.remove(c);
         }
     }

@@ -14,6 +14,7 @@ public class DeckTest {
     private Deck deck1;
     private Deck deck2;
     private Deck deck3;
+    private Deck deck4;
     private List<Card> otherList1;
     private List<Card> otherList3;
     private List<Card> otherList4;
@@ -37,6 +38,7 @@ public class DeckTest {
         deck1 = new Deck(otherList1);
         deck2 = new Deck(otherList2);
         deck3 = new Deck(otherList3);
+        deck4 = new Deck(new ArrayList<>());
     }
 
     @Test
@@ -82,5 +84,11 @@ public class DeckTest {
         deck1.removeCard(card2);
         otherList1.remove(card2);
         assertEquals(otherList1,deck1.getCards());
+    }
+
+    @Test
+    void testRemoveCardSize0() {
+        deck4.removeCard(card2);
+        assertEquals(new ArrayList<>(),deck4.getCards());
     }
 }
