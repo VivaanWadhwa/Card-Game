@@ -49,6 +49,15 @@ public class Shop implements Writable {
         return null;
     }
 
+    public Card getCardFromName(Object name) {
+        for (Card card : this.inventory.keySet()) {
+            if (card.getName() == name) {
+                return card;
+            }
+        }
+        return null;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

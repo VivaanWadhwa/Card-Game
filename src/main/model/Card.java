@@ -45,6 +45,11 @@ public class Card implements Writable {
         return this.condition;
     }
 
+    public void regenHealth() {
+        this.health = 100;
+        this.condition = "Alive";
+    }
+
 //  MODIFIES: this
 //  EFFECTS: Gets a particular card from the deck using its ID
     public int getCardID() {

@@ -74,4 +74,13 @@ public class Collection implements Iterable<Card>, Writable {
 
         return jsonArray;
     }
+
+    public Card getCardfromCardName(Object name) {
+        for (Card card : this.collection) {
+            if (card.getName() == name) {
+                return card;
+            }
+        }
+        return null;
+    }
 }

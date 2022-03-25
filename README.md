@@ -14,10 +14,10 @@ I like watching anime and I think this could be a fun little game for anyone who
 
 
 ##User Stories:
-- As a user, I would like to add cards from my collection to my deck(Done)
-- As a user, I would like to purchase new cards(Done)
+- As a user, I would like to add cards from my collection to my deck
+- As a user, I would like to purchase new cards
 - As a user, I would like to battle computer 
-- As a user, I would like to see my collection of cards(Done)
-- As a user, I would like to see the details of a card(Done)
+- As a user, I would like to see my collection of cards
+- As a user, I would like to see the details of a card
 - As a user, I want to be able to save my deck to file
 - As a user, I want to be able to have the option to load another deck and collection from file

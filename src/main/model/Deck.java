@@ -66,16 +66,42 @@ public class Deck implements Iterable<Card>, Writable {
         return null;
     }
 
+    public Card getCardfromCardName(Object name) {
+        for (Card card : this.deck) {
+            if (card.getName() == name) {
+                return card;
+            }
+        }
+        return null;
+    }
+
 //  EFFECTS: returns Iterable list of cards
     public Iterator<Card> iterator() {
         return this.deck.iterator();
     }
 
-//  EFFECTS: Chooses a random card from a given deck
+//  EFFECTS: Chooses a random valid card from a given deck
     public Card randomCard() {
+        List<Card> tempList = new ArrayList<>();
+        for (Card s: deck) {
+            if (s.checkCondition() == "Alive" || s.checkCondition() == "Damaged") {
+                tempList.add(s);
+                System.out.println(s.getName());
+            }
+        }
         Random rand = new Random();
-        Card c = deck.get(rand.nextInt(deck.size()));
+        Card c = tempList.get(rand.nextInt(tempList.size()));
         return c;
+    }
+
+    public Boolean checkIfAllFainted() {
+        Boolean b = true;
+        for (Card c: this.deck) {
+            if (c.checkCondition() == "Alive" || c.checkCondition() == "Damaged") {
+                b = false;
+            }
+        }
+        return b;
     }
 
     @Override
