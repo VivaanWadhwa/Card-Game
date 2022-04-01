@@ -41,3 +41,19 @@ I like watching anime and I think this could be a fun little game for anyone who
 - Bought card Card9 and added it to collection
 - Fri Apr 01 02:18:37 PDT 2022
 - Added Card Card9 to Collection
+
+
+##Phase 4: Task3
+
+I believe that I made an adequate version of a cardgame using the knowledge I had. I used various topics taught in class while working
+on this project and that helped me understand the material. Each of my classes are only responsible for ome function which helped me with
+the overall design of the project.
+
+Changes
+
+- I would make move and card an abstract class and actually make the different moves and classes as seperate classes.
+- I would add more fields in classes so that there's a stronger relationship between the class.
+- I would like to make the GUI more interactive and in theme with the app.
+
+
+
