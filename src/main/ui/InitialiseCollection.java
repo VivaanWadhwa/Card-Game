@@ -8,11 +8,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.HashMap;
 
@@ -61,7 +64,7 @@ public class InitialiseCollection extends JFrame {
     private void generateCardPanel(HashMap<Card, String> images) {
         JFrame cardDetails = new JFrame(currCard.getName());
         cardDetails.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        cardDetails.setSize(520,590);
+        cardDetails.setSize(700,590);
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(2,1));
         JPanel imagePanel = new JPanel() {
@@ -97,15 +100,16 @@ public class InitialiseCollection extends JFrame {
     private JPanel generateRightPanel() {
         JPanel rightSidePanel = new JPanel();
         rightSidePanel.setLayout(new GridLayout(1,1));
-        Formatter fmt = new Formatter();
-        fmt.format("%15s %15s %15s \n", "Name", "Damage", "Speed");
+        Object[] column = {"Name","Damage","Speed"};
+        DefaultTableModel data = new DefaultTableModel(0,3);
+        data.addRow(column);
         for (Move m : currCard.getMoves()) {
-            fmt.format("%15s %15s %15s \n", m.getName(), m.getDamage(), m.getSpeed());
+            Object[] temp = {m.getName(),m.getDamage(),m.getSpeed()};
+            data.addRow(temp);
         }
-        JTextArea ja = new JTextArea(fmt.toString());
-        ja.setEditable(false);
-        ja.setFont(new Font("Calibri", Font.PLAIN, 20));
-        rightSidePanel.add(ja);
+        System.out.println(data.getDataVector());
+        JTable jt = new JTable(data);
+        rightSidePanel.add(jt);
         return rightSidePanel;
     }
 

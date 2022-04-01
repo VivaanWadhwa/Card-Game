@@ -1,38 +1,10 @@
 {
     "Shop": {
         "Costs": [
-            100,
-            110
+            110,
+            100
         ],
         "Cards": [
-            {
-                "Condition": "Alive",
-                "Moves": [
-                    {
-                        "Speed": 5,
-                        "Damage": 12,
-                        "Name": "karin"
-                    },
-                    {
-                        "Speed": 2,
-                        "Damage": 5,
-                        "Name": "quickClaw"
-                    },
-                    {
-                        "Speed": 2,
-                        "Damage": 5,
-                        "Name": "push"
-                    },
-                    {
-                        "Speed": 1,
-                        "Damage": 4,
-                        "Name": "kick"
-                    }
-                ],
-                "Health": 100,
-                "name": "Card8",
-                "CardID": 8
-            },
             {
                 "Condition": "Alive",
                 "Moves": [
@@ -60,6 +32,34 @@
                 "Health": 100,
                 "name": "Card10",
                 "CardID": 10
+            },
+            {
+                "Condition": "Alive",
+                "Moves": [
+                    {
+                        "Speed": 5,
+                        "Damage": 12,
+                        "Name": "karin"
+                    },
+                    {
+                        "Speed": 2,
+                        "Damage": 5,
+                        "Name": "quickClaw"
+                    },
+                    {
+                        "Speed": 2,
+                        "Damage": 5,
+                        "Name": "push"
+                    },
+                    {
+                        "Speed": 1,
+                        "Damage": 4,
+                        "Name": "kick"
+                    }
+                ],
+                "Health": 100,
+                "name": "Card8",
+                "CardID": 8
             }
         ]
     },

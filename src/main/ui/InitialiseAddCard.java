@@ -3,6 +3,8 @@ package ui;
 import model.Card;
 import model.Collection;
 import model.Deck;
+import model.Event;
+import model.EventLog;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -42,6 +44,7 @@ public class InitialiseAddCard extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 Card c1 = col.getCardfromCardName(list.getSelectedValue());
+                EventLog.getInstance().logEvent(new Event("Card " + c1.getName() + "added to deck from collection"));
                 d.addCard(c1);
                 col.removeCard(c1);
                 createTempFrame();

@@ -1,9 +1,7 @@
 package ui;
 
-import model.Card;
-import model.Collection;
-import model.Shop;
-import model.Wallet;
+import model.*;
+import model.Event;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -53,8 +51,11 @@ public class InitialiseShop extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 Card c1 = s.getCardFromName(list.getSelectedValue());
+                EventLog.getInstance().logEvent(new Event("Bought card " + c1.getName()
+                        + " and added it to collection"));
                 s.buyItem(c1,w,c);
                 createTempFrame();
+                jf.dispose();
             }
         });
         return list;

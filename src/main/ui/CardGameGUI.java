@@ -2,39 +2,34 @@ package ui;
 
 import model.*;
 import model.Collection;
+import model.Event;
 import model.moves.Move;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
-
-import static javafx.scene.input.KeyCode.J;
 import static javax.swing.GroupLayout.Alignment.*;
 
 public class CardGameGUI extends JFrame {
-    private Scanner input;
     private static final String JSON_STORE = "./data/HasCards.json";
-    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    private JsonReader jsonReader = new JsonReader(JSON_STORE);
-//    private JFrame mainFrame = new JFrame("Card Game");
-    private JLabel startLabel = new JLabel("WELCOME TO THE CARDGAME");
-    private JButton playButton = new JButton(new ImageIcon("./images/Play.png"));
-    private JButton deckButton = new JButton(new ImageIcon("./images/Deck.png"));
-    private JButton colButton = new JButton(new ImageIcon("./images/Collection.png"));
-    private JButton shopButton = new JButton(new ImageIcon("./images/Shop.png"));
-    private JButton loadButton = new JButton(new ImageIcon("./images/Load.png"));
-    private JButton saveButton = new JButton(new ImageIcon("./images/Save.png"));
+    private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private final JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private final JLabel startLabel = new JLabel("WELCOME TO THE CARDGAME");
+    private final JButton playButton = new JButton(new ImageIcon("./images/Play.png"));
+    private final JButton deckButton = new JButton(new ImageIcon("./images/Deck.png"));
+    private final JButton colButton = new JButton(new ImageIcon("./images/Collection.png"));
+    private final JButton shopButton = new JButton(new ImageIcon("./images/Shop.png"));
+    private final JButton loadButton = new JButton(new ImageIcon("./images/Load.png"));
+    private final JButton saveButton = new JButton(new ImageIcon("./images/Save.png"));
     protected Collection col;
     protected Deck deck;
     protected Deck cpudeck;
-    private Boolean keepGoing;
     protected Shop shop;
     protected Wallet wallet;
     protected HasCards hasCards;
@@ -48,15 +43,19 @@ public class CardGameGUI extends JFrame {
 
 //  EFFECTS: Runs Game
     public void runGame() {
-        this.keepGoing = true;
-
         init();
         initMoves();
-        while (this.keepGoing) {
-            game();
-        }
-
-        System.out.println("\nGoodbye!");
+        game();
+//        detectIfClosed();
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                for (Event el: EventLog.getInstance()) {
+                    System.out.println(el.toString());
+                }
+            }
+        });
     }
 
 //  EFFECTS: Starts Game
@@ -66,7 +65,6 @@ public class CardGameGUI extends JFrame {
 
 //  EFFECTS: Generates initial objects required in later code
     public void init() {
-        input = new Scanner(System.in);
         Hashtable<Card, Integer> inventory = new Hashtable<>();
         this.shop = new Shop(inventory);
         this.wallet = new Wallet();
@@ -167,46 +165,16 @@ public class CardGameGUI extends JFrame {
 
 //  EFFECTS: Sets Button Commands in main menu
     private void setButtonCommandsMenu2() {
-        loadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadHasCards();
-            }
-        });
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveHasCards();
-            }
-        });
-        colButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                collection();
-            }
-        });
+        loadButton.addActionListener(e -> loadHasCards());
+        saveButton.addActionListener(e -> saveHasCards());
+        colButton.addActionListener(e -> collection());
     }
 
     //  EFFECTS: Sets Button commands in main menu
     private void setButtonCommandsMenu1() {
-        playButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                play();
-            }
-        });
-        deckButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deck();
-            }
-        });
-        shopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                shop();
-            }
-        });
+        playButton.addActionListener(e -> play());
+        deckButton.addActionListener(e -> deck());
+        shopButton.addActionListener(e -> shop());
     }
 
 //  EFFECTS: Saves All Card to json file at given directory
@@ -250,12 +218,7 @@ public class CardGameGUI extends JFrame {
         temp.setLayout(new GridLayout(2,1));
         JLabel label1 = new JLabel(loaded);
         JButton ok = new JButton("Ok");
-        ok.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                temp.dispose();
-            }
-        });
+        ok.addActionListener(e -> temp.dispose());
         temp.add(label1);
         temp.add(ok);
         temp.pack();

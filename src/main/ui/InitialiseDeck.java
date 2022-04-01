@@ -9,17 +9,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.GroupLayout.Alignment.CENTER;
-
 // Represents Deck JFrame
 public class InitialiseDeck extends JFrame {
-    private GridLayout p1;
 
-//  MODIFIES: this
+    //  MODIFIES: this
 //  EFFECTS: Initialises Deck Frame
     public InitialiseDeck(Deck deck, Collection col) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        p1 = new GridLayout(3,1);
+        GridLayout p1 = new GridLayout(3, 1);
         this.setLayout(p1);
         DefaultListModel listmodel = new DefaultListModel();
         for (Card c: deck) {

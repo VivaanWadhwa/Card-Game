@@ -23,6 +23,7 @@ public class Collection implements Iterable<Card>, Writable {
 //  REQUIRES: Card to be added
 //  EFFECTs: Adds desired card to the collection
     public void addCard(Card c) {
+        EventLog.getInstance().logEvent(new Event("Added Card " + c.getName() + " to Collection"));
         this.collection.add(c);
     }
 
@@ -32,13 +33,14 @@ public class Collection implements Iterable<Card>, Writable {
 
     public void removeCard(Card c) {
         this.collection.remove(c);
+//        EventLog.getInstance().logEvent(new Event("Removed Card " + c.getName() + " from Collection"));
     }
 
 //  MODIFIES: this and deck
 //  EFFECTS: Removes card from collection and adds to deck
     public void addToDeck(Card c,Deck d) {
         d.addCard(c);
-        this.collection.remove(c);
+        this.removeCard(c);
     }
 
 //  EFFECTS: returns iterable collection

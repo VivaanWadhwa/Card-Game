@@ -28,11 +28,13 @@ public class Shop implements Writable {
 //  EFFECTS: adds item to inventory with its price
     public void addItem(Card c, int price) {
         this.inventory.put(c,price);
+        EventLog.getInstance().logEvent(new Event("Added Card " + c.getName() + " to Shop for " + price));
     }
 
 //  MODIFIES: this, Card, Wallet and Collection
 //  EFFECTS: Removes item from shop, deducts cost from wallet, and adds to collection
     public void buyItem(Card c, Wallet w, Collection col) {
+//        EventLog.getInstance().logEvent(new Event("User bought Card " + c.getName() + "from shop"));
         col.addCard(c);
         w.deductBalance(this.inventory.get(c));
         this.inventory.remove(c);

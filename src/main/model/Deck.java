@@ -33,6 +33,7 @@ public class Deck implements Iterable<Card>, Writable {
 //  EFFECTS: adds a card to deck
     public void addCard(Card c) {
         if (deck.size() <= MAX_CARDS) {
+//            EventLog.getInstance().logEvent(new Event("Added Card " + c.getName() + " to deck"));
             deck.add(c);
         }
     }
@@ -51,6 +52,7 @@ public class Deck implements Iterable<Card>, Writable {
 //  EFFECTS: Removes card from deck
     public void removeCard(Card c) {
         if (deck.size() != 0) {
+            EventLog.getInstance().logEvent(new Event("Removed Card " + c.getName() + " from deck"));
             deck.remove(c);
         }
     }
