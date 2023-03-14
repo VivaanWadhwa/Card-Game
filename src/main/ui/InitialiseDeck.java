@@ -44,6 +44,32 @@ public class InitialiseDeck extends JFrame {
                 jf.dispose();
             }
         });
+        JButton removeCard = new JButton("Remove Card");
+        removeCard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (d.getSize() == 0) {
+                    JFrame temp = new JFrame("Caution");
+                    temp.setLayout(new GridLayout(2,1));
+                    JLabel j = new JLabel("Cannot Remove Card! No Card in Deck.");
+                    JButton b = new JButton("Ok");
+                    b.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            temp.dispose();
+                        }
+                    });
+                    temp.add(j);
+                    temp.add(b);
+                    temp.pack();
+                    temp.setVisible(true);
+                } else {
+                    new InitialiseRemoveCard(d,col);
+                    jf.dispose();
+                }
+            }
+        });
+        this.add(removeCard);
         this.add(goBack(this));
     }
 

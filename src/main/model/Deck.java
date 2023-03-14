@@ -28,6 +28,10 @@ public class Deck implements Iterable<Card>, Writable {
         return this.deck;
     }
 
+    public int getSize() {
+        return this.deck.size();
+    }
+
 //  MODIFIES: this
 //  REQUIRES: deck size < MAX_CARDS
 //  EFFECTS: adds a card to deck
