@@ -1,12 +1,12 @@
-# My Personal Project
+# Card Game
 
 #What will the application do?
 
-It will be a anime card game, with various characters from different anime which have different stats.
+It will be a card game, with various characters from different anime which have different stats.
 
 #Who will use it?
 
-Any person who is fond of anime or just likes to play card games in general can play this game.
+Any person who likes to play card games in general can play this game.
 
 #Why is this project of interest to you?
 
