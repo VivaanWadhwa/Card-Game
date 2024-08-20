@@ -33,45 +33,33 @@ public class CardGameGUI extends JFrame {
     protected Shop shop;
     protected Wallet wallet;
     protected HasCards hasCards;
-    private HashMap<Card,String> images;
+    private HashMap<Card, String> images;
 
-
-//  Constructor
     public CardGameGUI() {
         runGame();
     }
 
-//  EFFECTS: Runs Game
     public void runGame() {
         init();
         initMoves();
         game();
-//        detectIfClosed();
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                for (Event el: EventLog.getInstance()) {
+                for (Event el : EventLog.getInstance()) {
                     System.out.println(el.toString());
                 }
             }
         });
     }
 
-//  EFFECTS: Starts Game
-    public void game() {
-        displayMenu();
-    }
-
-//  EFFECTS: Generates initial objects required in later code
-    public void init() {
+    private void init() {
         Hashtable<Card, Integer> inventory = new Hashtable<>();
         this.shop = new Shop(inventory);
         this.wallet = new Wallet();
     }
 
-//  EFFECTS: Generates Initial moves, cards, deck, collection, shop and wallet
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void initMoves() {
         //   Moves
         //  Major Attacks
@@ -128,14 +116,18 @@ public class CardGameGUI extends JFrame {
         images.put(card10,"./images/Card10.png");
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public void displayMenu() {
+    private void game() {
+        displayMenu();
+    }
+
+    private void displayMenu() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPanel = this.getContentPane();
         GroupLayout p1 = new GroupLayout(contentPanel);
         contentPanel.setLayout(p1);
         p1.setAutoCreateGaps(true);
         p1.setAutoCreateContainerGaps(true);
+
         p1.setHorizontalGroup(
                 p1.createSequentialGroup()
                         .addGroup(p1.createParallelGroup(CENTER).addComponent(startLabel)
@@ -146,7 +138,9 @@ public class CardGameGUI extends JFrame {
                                         .addComponent(loadButton)
                                         .addComponent(saveButton)))
         );
-        p1.linkSize(SwingConstants.HORIZONTAL,playButton,deckButton,colButton,shopButton,loadButton,saveButton);
+
+        p1.linkSize(SwingConstants.HORIZONTAL, playButton, deckButton, colButton, shopButton, loadButton, saveButton);
+
         p1.setVerticalGroup(
                 p1.createSequentialGroup()
                         .addComponent(startLabel)
@@ -157,42 +151,46 @@ public class CardGameGUI extends JFrame {
                         .addGroup(p1.createSequentialGroup().addComponent(loadButton)
                                 .addComponent(saveButton))
         );
+
+        setButtonActions();
         pack();
-        setButtonCommandsMenu1();
-        setButtonCommandsMenu2();
         setVisible(true);
     }
 
-//  EFFECTS: Sets Button Commands in main menu
-    private void setButtonCommandsMenu2() {
+    private void setButtonActions() {
+        playButton.addActionListener(e -> startPlay());
+        deckButton.addActionListener(e -> deck());
+        shopButton.addActionListener(e -> shop());
         loadButton.addActionListener(e -> loadHasCards());
         saveButton.addActionListener(e -> saveHasCards());
         colButton.addActionListener(e -> collection());
     }
 
-    //  EFFECTS: Sets Button commands in main menu
-    private void setButtonCommandsMenu1() {
-        playButton.addActionListener(e -> play());
-        deckButton.addActionListener(e -> deck());
-        shopButton.addActionListener(e -> shop());
+    private void startPlay() {
+        Card cpuCard = cpudeck.randomCard();
+        new GamePlayPanel(deck, cpudeck, cpuCard);
+        resetHealth(deck);
+        resetHealth(cpudeck);
     }
 
-//  EFFECTS: Saves All Card to json file at given directory
-    public void saveHasCards() {
-        try {
-            hasCards = new HasCards(col,deck,shop,wallet);
-            jsonWriter.open();
-            jsonWriter.write(hasCards);
-            jsonWriter.close();
-            String s = "Saved to " + JSON_STORE;
-            generateTempFrame("Saved Data",s);
-        } catch (FileNotFoundException e) {
-            String s = "Unable to write to file: " + JSON_STORE;
-            generateTempFrame("ERROR", s);
+    private void resetHealth(Deck deck) {
+        for (Card c : deck) {
+            c.regenHealth();
         }
     }
 
-//  EFFECTS:Loads HasCards from JsonFile at given directory
+    public void saveHasCards() {
+        try {
+            hasCards = new HasCards(col, deck, shop, wallet);
+            jsonWriter.open();
+            jsonWriter.write(hasCards);
+            jsonWriter.close();
+            showMessage("Saved Data", "Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            showMessage("ERROR", "Unable to write to file: " + JSON_STORE);
+        }
+    }
+
     public void loadHasCards() {
         try {
             hasCards = jsonReader.read();
@@ -200,57 +198,26 @@ public class CardGameGUI extends JFrame {
             deck = hasCards.getDeck();
             shop = hasCards.getShop();
             wallet = hasCards.getWallet();
-            String s = "Loaded data from..." + JSON_STORE;
-            generateTempFrame("Loaded Data",s);
-        } catch (IOException e) {
-            String s = "Unable to load file: " + JSON_STORE;
-            generateTempFrame("ERROR",s);
-        } catch (JSONException e) {
-            String s = "File is empty! Please save before loading";
-            generateTempFrame("ERROR",s);
-        }
-
-    }
-
-//  EFFECTS: Generates Temp frame for load/save
-    private void generateTempFrame(String title,String loaded) {
-        JFrame temp = new JFrame(title);
-        temp.setLayout(new GridLayout(2,1));
-        JLabel label1 = new JLabel(loaded);
-        JButton ok = new JButton("Ok");
-        ok.addActionListener(e -> temp.dispose());
-        temp.add(label1);
-        temp.add(ok);
-        temp.pack();
-        temp.setVisible(true);
-    }
-
-//  EFFECTS: Generates Shop Panel
-    public void shop() {
-        new InitialiseShop(shop,wallet,col);
-    }
-
-//  EFFECTS: Generates Play Panel
-    public void play() {
-        Card cpuCard = cpudeck.randomCard();
-        new InitialisePlay(deck,cpudeck,cpuCard);
-        for (Card c: deck) {
-            c.regenHealth();
-        }
-        for (Card c : cpudeck) {
-            c.regenHealth();
+            showMessage("Loaded Data", "Loaded data from " + JSON_STORE);
+        } catch (IOException | JSONException e) {
+            showMessage("ERROR", "Unable to load file: " + JSON_STORE);
         }
     }
 
+    private void showMessage(String title, String message) {
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
 
-//  EFFECTS: Generates Deck Panel
-    public void deck() {
+    private void shop() {
+        new InitialiseShop(shop, wallet, col);
+    }
+
+    private void deck() {
         new InitialiseDeck(deck, col);
     }
 
-//  EFFECTS: Generates collection panel
-    public void collection() {
-        new InitialiseCollection(col,images);
+    private void collection() {
+        new InitialiseCollection(col, images);
     }
-
 }
+
